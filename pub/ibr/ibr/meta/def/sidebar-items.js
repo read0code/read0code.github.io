@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["ColumnKeys","ColumnTypes","HiddenTypes","IndexAlgorithm","IndexOrder","IndexTypes","RowFormats"],"struct":["ColumnDef","IndexDef","IndexElementDef","TableDef"]};

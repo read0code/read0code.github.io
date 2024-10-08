@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["DATA_ROLL_PTR_LEN","DATA_ROW_ID_LEN","DATA_TRX_ID_LEN","REC_NODE_PTR_SIZE","REC_N_FIELDS_ONE_BYTE_MAX"],"enum":["DataValue","RecInfoFlag","RecordStatus"],"struct":["FieldDatum","FieldMeta","Record","RecordHeader","RecordLayout","ResultSet","RowData","RowInfo"]};

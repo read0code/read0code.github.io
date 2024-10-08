@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["XIDDATASIZE"],"enum":["CmplInfos","UndoExtraFlags","UndoFlags","UndoRecordPayloads","UndoTypes"],"struct":["RollPtr","UndoLog","UndoLogHeader","UndoRecForInsert","UndoRecForUpdate","UndoRecKeyField","UndoRecUpdatedField","UndoRecord","UndoRecordHeader","XaTrxInfo"]};

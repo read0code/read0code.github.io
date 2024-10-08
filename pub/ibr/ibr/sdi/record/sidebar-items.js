@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["DataDictObjectTypes","EntryTypes"],"struct":["DataDictColumn","DataDictColumnElement","DataDictIndex","DataDictIndexElement","SdiEntry","SdiTableObject","SdiTablespaceObject","TableDataDictObject","TablespaceDataDictObject"]};

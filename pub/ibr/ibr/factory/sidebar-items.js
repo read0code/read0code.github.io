@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["SDI_META_INFO_MIN_VER"],"struct":["DatafileFactory"]};
