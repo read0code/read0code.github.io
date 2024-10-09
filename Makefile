@@ -1,2 +1,9 @@
+PD_FLAGS := --from=org --to=html
+
 index.html: readme.org
-	pandoc -s readme.org -o index.html
+	pandoc $(PD_FLAGS) -s readme.org -o index.html
+
+
+.PHONY: clean
+clean:
+	rm *.html
