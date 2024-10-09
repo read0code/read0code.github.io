@@ -1,4 +1,4 @@
-PD_FLAGS := --from=org --to=html
+PD_FLAGS := --from=org --to=html --toc --number-sections
 
 index.html: readme.org
 	pandoc $(PD_FLAGS) -s readme.org -o index.html
