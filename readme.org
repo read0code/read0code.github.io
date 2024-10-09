@@ -6,5 +6,5 @@
 #+OPTIONS: ^:nil
 
 
-* Development Documentation
+* Public Documentation
 1. Innobase reader source documentation | [[https://read0code.github.io/pub/ibr/ibr/][ibr]]
