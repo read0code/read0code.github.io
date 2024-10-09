@@ -1,2 +1,2 @@
 index.html: readme.org
-	pandoc readme.org -o index.html
+	pandoc -s readme.org -o index.html
