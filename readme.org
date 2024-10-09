@@ -7,4 +7,4 @@
 
 
 * Public Documentation
-1. Innobase reader source documentation | [[pub/ibr/ibr/index.html][ibr]]
+1. Innobase reader source documentation | [[https://read0code.github.io/pub/ibr/ibr/index.html][ibr]]
