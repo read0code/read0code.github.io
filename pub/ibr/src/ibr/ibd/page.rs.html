@@ -2018,6 +2018,7 @@
 <a href="#2018" id="2018">2018</a>
 <a href="#2019" id="2019">2019</a>
 <a href="#2020" id="2020">2020</a>
+<a href="#2021" id="2021">2021</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>core::fmt;
 <span class="kw">use </span>std::{
     fmt::{Debug, Display, Formatter},
@@ -3537,6 +3538,7 @@
     </span><span class="kw">pub </span>fseg_hdr: FSegHeader,
 
     <span class="doccomment">/// (8 * 128 bytes) the array of rollback segment specification slots
+    </span><span class="attr">#[derivative(Debug(format_with = <span class="string">"util::fmt_oneline_vec"</span>))]
     </span><span class="kw">pub </span>rseg_slots: Vec&lt;RSegInfo&gt;,
 
     <span class="doccomment">/// (524 bytes) log info for binlog
