@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/ibd/undo.rs`."><title>undo.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-c5d6553a23f1e5a6.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="ibr" data-themes="" data-resource-suffix="" data-rustdoc-version="1.81.0 (eeb90cda1 2024-09-04)" data-channel="1.81.0" data-search-js="search-d234aafac6c221dd.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-d2fab2bf619172d3.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/ibd/undo.rs`."><title>undo.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-492a78a4a87dcc01.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="ibr" data-themes="" data-resource-suffix="" data-rustdoc-version="1.82.0 (f6e511eec 2024-10-15)" data-channel="1.82.0" data-search-js="search-a99f1315e7cc5121.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-921df33f47b8780c.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-3b12f09e550e0385.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -759,6 +759,47 @@
 <a href="#759" id="759">759</a>
 <a href="#760" id="760">760</a>
 <a href="#761" id="761">761</a>
+<a href="#762" id="762">762</a>
+<a href="#763" id="763">763</a>
+<a href="#764" id="764">764</a>
+<a href="#765" id="765">765</a>
+<a href="#766" id="766">766</a>
+<a href="#767" id="767">767</a>
+<a href="#768" id="768">768</a>
+<a href="#769" id="769">769</a>
+<a href="#770" id="770">770</a>
+<a href="#771" id="771">771</a>
+<a href="#772" id="772">772</a>
+<a href="#773" id="773">773</a>
+<a href="#774" id="774">774</a>
+<a href="#775" id="775">775</a>
+<a href="#776" id="776">776</a>
+<a href="#777" id="777">777</a>
+<a href="#778" id="778">778</a>
+<a href="#779" id="779">779</a>
+<a href="#780" id="780">780</a>
+<a href="#781" id="781">781</a>
+<a href="#782" id="782">782</a>
+<a href="#783" id="783">783</a>
+<a href="#784" id="784">784</a>
+<a href="#785" id="785">785</a>
+<a href="#786" id="786">786</a>
+<a href="#787" id="787">787</a>
+<a href="#788" id="788">788</a>
+<a href="#789" id="789">789</a>
+<a href="#790" id="790">790</a>
+<a href="#791" id="791">791</a>
+<a href="#792" id="792">792</a>
+<a href="#793" id="793">793</a>
+<a href="#794" id="794">794</a>
+<a href="#795" id="795">795</a>
+<a href="#796" id="796">796</a>
+<a href="#797" id="797">797</a>
+<a href="#798" id="798">798</a>
+<a href="#799" id="799">799</a>
+<a href="#800" id="800">800</a>
+<a href="#801" id="801">801</a>
+<a href="#802" id="802">802</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::sync::Arc;
 
 <span class="kw">use </span>bytes::Bytes;
@@ -768,7 +809,9 @@
 <span class="kw">use </span>serde_repr::{Deserialize_repr, Serialize_repr};
 <span class="kw">use </span>strum::{Display, EnumString};
 
-<span class="kw">use </span><span class="kw">super</span>::page::{FlstNode, PageNumber, SpaceId, UndoPageHeader, UndoPageTypes, UNIV_PAGE_SIZE};
+<span class="kw">use </span><span class="kw">super</span>::page::{
+    FlstNode, PageNumber, SpaceId, UndoPageHeader, UndoPageTypes, FIL_HEADER_SIZE, UNIV_PAGE_SIZE,
+};
 <span class="kw">use crate</span>::{ibd::dict, util};
 
 <span class="doccomment">/// XID data size
@@ -805,7 +848,7 @@
                 <span class="kw">break</span>;
             }
 
-            <span class="kw">let </span>rec = UndoRecord::new(rec_addr, buf.clone(), page_hdr);
+            <span class="kw">let </span>rec = UndoRecord::new(rec_addr, buf.clone(), page_hdr, <span class="prelude-val">None</span>);
             rec_addr = rec.undo_rec_hdr.next_addr();
             <span class="kw">let </span>type_info = rec.undo_rec_hdr.type_info.clone();
             rec_list.push(rec);
@@ -1068,7 +1111,12 @@
 }
 
 <span class="kw">impl </span>UndoRecord {
-    <span class="kw">pub fn </span>new(addr: usize, buf: Arc&lt;Bytes&gt;, page_hdr: <span class="kw-2">&amp;</span>UndoPageHeader) -&gt; <span class="self">Self </span>{
+    <span class="kw">pub fn </span>new(
+        addr: usize,
+        buf: Arc&lt;Bytes&gt;,
+        page_hdr: <span class="kw-2">&amp;</span>UndoPageHeader,
+        n_uniq: <span class="prelude-ty">Option</span>&lt;usize&gt;,
+    ) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>hdr = UndoRecordHeader::new(addr, buf.clone());
         <span class="macro">info!</span>(<span class="string">"hdr = {:?}"</span>, <span class="kw-2">&amp;</span>hdr);
 
@@ -1076,10 +1124,10 @@
             UndoTypes::ZERO_VAL =&gt; UndoRecordPayloads::Nothing,
             <span class="kw">_ </span>=&gt; <span class="kw">match </span>page_hdr.page_type {
                 UndoPageTypes::TRX_UNDO_INSERT =&gt; {
-                    UndoRecordPayloads::Insert(UndoRecForInsert::new(addr + <span class="number">3</span>, buf.clone()))
+                    UndoRecordPayloads::Insert(UndoRecForInsert::new(addr + <span class="number">3</span>, buf.clone(), n_uniq))
                 }
                 UndoPageTypes::TRX_UNDO_UPDATE =&gt; {
-                    UndoRecordPayloads::Update(UndoRecForUpdate::new(addr + <span class="number">3</span>, buf.clone()))
+                    UndoRecordPayloads::Update(UndoRecForUpdate::new(addr + <span class="number">3</span>, buf.clone(), n_uniq))
                 }
                 UndoPageTypes::UNDEF =&gt; UndoRecordPayloads::Nothing,
             },
@@ -1091,6 +1139,11 @@
             buf: buf.clone(),
             addr,
         }
+    }
+
+    <span class="kw">pub fn </span>read(addr: usize, buf: Arc&lt;Bytes&gt;, boffset: usize, n_uniq: usize) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>page_hdr = UndoPageHeader::new(addr + FIL_HEADER_SIZE, buf.clone());
+        <span class="self">Self</span>::new(addr + boffset, buf.clone(), <span class="kw-2">&amp;</span>page_hdr, <span class="prelude-val">Some</span>(n_uniq))
     }
 }
 
@@ -1293,7 +1346,7 @@
 }
 
 <span class="kw">impl </span>UndoRecForInsert {
-    <span class="kw">pub fn </span>new(addr: usize, buf: Arc&lt;Bytes&gt;) -&gt; <span class="self">Self </span>{
+    <span class="kw">pub fn </span>new(addr: usize, buf: Arc&lt;Bytes&gt;, n_uniq: <span class="prelude-ty">Option</span>&lt;usize&gt;) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>ptr = addr;
 
         <span class="kw">let </span>undo_no = util::u64_much_compressed(ptr, buf.clone());
@@ -1304,7 +1357,7 @@
 
         <span class="comment">// key fields
         </span><span class="kw">let </span><span class="kw-2">mut </span>key_fields = <span class="macro">vec!</span>[];
-        <span class="kw">let </span>n_unique_key = dict::get_n_unique_key(table_id.<span class="number">1</span>);
+        <span class="kw">let </span>n_unique_key = n_uniq.unwrap_or(dict::get_n_unique_key(table_id.<span class="number">1</span>));
         <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n_unique_key {
             <span class="kw">let </span>key = UndoRecKeyField::new(ptr, buf.clone(), i);
             ptr += key.total_bytes;
@@ -1362,7 +1415,7 @@
 }
 
 <span class="kw">impl </span>UndoRecForUpdate {
-    <span class="kw">pub fn </span>new(addr: usize, buf: Arc&lt;Bytes&gt;) -&gt; <span class="self">Self </span>{
+    <span class="kw">pub fn </span>new(addr: usize, buf: Arc&lt;Bytes&gt;, n_uniq: <span class="prelude-ty">Option</span>&lt;usize&gt;) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>ptr = addr;
 
         <span class="comment">// info!("peek={:?}", buf.slice(ptr..ptr + 20).to_vec());
@@ -1386,7 +1439,7 @@
 
         <span class="comment">// key fields
         </span><span class="kw">let </span><span class="kw-2">mut </span>key_fields = <span class="macro">vec!</span>[];
-        <span class="kw">let </span>n_unique_key = dict::get_n_unique_key(table_id.<span class="number">1</span>);
+        <span class="kw">let </span>n_unique_key = n_uniq.unwrap_or(dict::get_n_unique_key(table_id.<span class="number">1</span>));
         <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n_unique_key {
             <span class="kw">let </span>key = UndoRecKeyField::new(ptr, buf.clone(), i);
             ptr += key.total_bytes;
@@ -1518,6 +1571,35 @@
             buf: buf.clone(),
             addr,
         }
+    }
+}
+
+<span class="attr">#[cfg(test)]
+</span><span class="kw">mod </span>undo_tests {
+
+    <span class="kw">use </span>std::path::PathBuf;
+
+    <span class="kw">use </span>anyhow::Result;
+
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use crate</span>::{factory::DatafileFactory, util};
+
+    <span class="kw">const </span>REDO_1: <span class="kw-2">&amp;</span>str = <span class="string">"data/redo_block_01"</span>;
+    <span class="kw">const </span>UNDO_1: <span class="kw-2">&amp;</span>str = <span class="string">"data/undo_log_01"</span>;
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>test_read_undo_record() -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+        util::init_unit_test();
+
+        <span class="kw">let </span><span class="kw-2">mut </span>fact = DatafileFactory::from_file(PathBuf::from(UNDO_1))<span class="question-mark">?</span>;
+        <span class="kw">let </span>page = <span class="number">188</span>;
+        <span class="kw">let </span>buf = fact.page_buffer(page)<span class="question-mark">?</span>;
+
+        <span class="kw">let </span>boffset = <span class="number">418</span>;
+        <span class="kw">let </span>ans = UndoRecord::read(<span class="number">0</span>, buf, boffset, <span class="number">1</span>);
+        <span class="macro">dbg!</span>(<span class="kw-2">&amp;</span>ans);
+
+        <span class="prelude-val">Ok</span>(())
     }
 }
 </code></pre></div></section></main></body></html>

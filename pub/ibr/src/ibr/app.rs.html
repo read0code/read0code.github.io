@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/app.rs`."><title>app.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-c5d6553a23f1e5a6.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="ibr" data-themes="" data-resource-suffix="" data-rustdoc-version="1.81.0 (eeb90cda1 2024-09-04)" data-channel="1.81.0" data-search-js="search-d234aafac6c221dd.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-d2fab2bf619172d3.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-df360f571f6edeae.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/app.rs`."><title>app.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-492a78a4a87dcc01.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="ibr" data-themes="" data-resource-suffix="" data-rustdoc-version="1.82.0 (f6e511eec 2024-10-15)" data-channel="1.82.0" data-search-js="search-a99f1315e7cc5121.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../../static.files/storage-118b08c4c78b968e.js"></script><script defer src="../../static.files/src-script-e66d777a5a92e9b2.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-921df33f47b8780c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-3b12f09e550e0385.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -972,6 +972,36 @@
 <a href="#972" id="972">972</a>
 <a href="#973" id="973">973</a>
 <a href="#974" id="974">974</a>
+<a href="#975" id="975">975</a>
+<a href="#976" id="976">976</a>
+<a href="#977" id="977">977</a>
+<a href="#978" id="978">978</a>
+<a href="#979" id="979">979</a>
+<a href="#980" id="980">980</a>
+<a href="#981" id="981">981</a>
+<a href="#982" id="982">982</a>
+<a href="#983" id="983">983</a>
+<a href="#984" id="984">984</a>
+<a href="#985" id="985">985</a>
+<a href="#986" id="986">986</a>
+<a href="#987" id="987">987</a>
+<a href="#988" id="988">988</a>
+<a href="#989" id="989">989</a>
+<a href="#990" id="990">990</a>
+<a href="#991" id="991">991</a>
+<a href="#992" id="992">992</a>
+<a href="#993" id="993">993</a>
+<a href="#994" id="994">994</a>
+<a href="#995" id="995">995</a>
+<a href="#996" id="996">996</a>
+<a href="#997" id="997">997</a>
+<a href="#998" id="998">998</a>
+<a href="#999" id="999">999</a>
+<a href="#1000" id="1000">1000</a>
+<a href="#1001" id="1001">1001</a>
+<a href="#1002" id="1002">1002</a>
+<a href="#1003" id="1003">1003</a>
+<a href="#1004" id="1004">1004</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>std::{
     cmp::min,
     collections::{BTreeMap, HashSet},
@@ -995,6 +1025,7 @@
         },
         record::DataValue,
         redo::{Blocks, LogFile, LogRecordTypes, RedoRecordPayloads},
+        undo::UndoRecord,
     },
     util::{colored_extent_number, colored_page_number},
     Commands,
@@ -1086,6 +1117,17 @@
                     </span>}
                 },
             },
+            Commands::Undo {
+                page_no,
+                boffset,
+                n_uniq,
+            } =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>fact = DatafileFactory::from_file(<span class="self">self</span>.input.clone())<span class="question-mark">?</span>;
+                <span class="kw">let </span>buf = fact.page_buffer(page_no)<span class="question-mark">?</span>;
+                <span class="kw">let </span>addr = <span class="number">0</span>;
+                <span class="kw">let </span>undo_rec = UndoRecord::read(addr, buf, boffset, n_uniq);
+                <span class="macro">println!</span>(<span class="string">"{:#?}"</span>, undo_rec)
+            }
             Commands::Redo {
                 block_no,
                 dump_log_type,
@@ -1864,6 +1906,8 @@
 
     <span class="kw">const </span>IBD_01: <span class="kw-2">&amp;</span>str = <span class="string">"data/departments.ibd"</span>;
     <span class="kw">const </span>IBD_02: <span class="kw-2">&amp;</span>str = <span class="string">"data/dept_manager.ibd"</span>;
+    <span class="kw">const </span>REDO_1: <span class="kw-2">&amp;</span>str = <span class="string">"data/redo_block_01"</span>;
+    <span class="kw">const </span>UNDO_1: <span class="kw-2">&amp;</span>str = <span class="string">"data/undo_log_01"</span>;
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>info_datafile() {
@@ -1927,6 +1971,22 @@
             verbose: <span class="bool-val">false</span>,
             btree_root: <span class="prelude-val">None</span>,
         });
+        <span class="macro">assert!</span>(ans.is_ok());
+    }
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>view_redo_log_file() {
+        util::init_unit_test();
+        <span class="kw">let </span>app = App::new(PathBuf::from(REDO_1));
+        <span class="kw">let </span>ans = app.do_view_log_file();
+        <span class="macro">assert!</span>(ans.is_ok());
+    }
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>view_redo_log_block_0() {
+        util::init_unit_test();
+        <span class="kw">let </span>app = App::new(PathBuf::from(REDO_1));
+        <span class="kw">let </span>ans = app.do_view_block(<span class="number">0</span>);
         <span class="macro">assert!</span>(ans.is_ok());
     }
 
